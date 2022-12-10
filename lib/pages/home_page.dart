@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firetasks/ui/general/colors.dart';
 import 'package:firetasks/ui/widgets/general_widget.dart';
+import 'package:firetasks/ui/widgets/item_task_widget.dart';
 import 'package:firetasks/ui/widgets/texField_searchWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,27 @@ class HomePage extends StatelessWidget {
       },
     ),*/
     backgroundColor: kBrandSegundaryColor,
+    floatingActionButton: InkWell(
+      onTap: () {
+        
+      },borderRadius: BorderRadius.circular(14.0),
+      child: Container(
+        padding:const EdgeInsets.symmetric(horizontal: 10.0,vertical: 8.0),
+        decoration: BoxDecoration(
+          color: kBrandPrimaryColor,
+          borderRadius: BorderRadius.circular(14.0)
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.add,color: Colors.white,),
+            Text("Nueva Tarea",style: TextStyle(
+              color: Colors.white,
+            ),),
+          ],
+        ),
+      ),
+    ),
     body: SingleChildScrollView(
       child: Column(
         children: [
@@ -75,7 +97,25 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-    
+
+          Padding(
+            padding: EdgeInsets.all(14.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+          Text(" Todas mis tareas",
+          style: TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.w600,
+            color: kBrandPrimaryColor.withOpacity(0.9),
+          ),),
+            ItemTaskWidget(),
+            ItemTaskWidget(),
+            ItemTaskWidget(),
+            ItemTaskWidget(),
+           ],
+            ),)
+ 
         ],
       ),
     ),
