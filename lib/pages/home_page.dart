@@ -4,93 +4,25 @@ import 'package:firetasks/ui/general/colors.dart';
 import 'package:firetasks/ui/widgets/bottom_page.dart';
 import 'package:firetasks/ui/widgets/general_widget.dart';
 import 'package:firetasks/ui/widgets/item_task_widget.dart';
+import 'package:firetasks/ui/widgets/tasks_form_widget.dart';
 import 'package:firetasks/ui/widgets/texField_normalWidget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+
+  final TextEditingController _searchController=TextEditingController();
 
   CollectionReference tasksReference=FirebaseFirestore.instance.collection("tasks");
 
   showTaskForm(BuildContext context){
     showModalBottomSheet(
       context: context, 
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder:(BuildContext context) {
-        return Container(
-          padding: EdgeInsets.all(14.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(22.0)),
-          ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text("Agregar tarea",style: TextStyle(
-              fontSize: 15.0,
-              fontWeight: FontWeight.w600,
-            ),),
-            divider6(),
-            TextFieldNormalWidget(hintText:"Titulo" ,icon:Icons.text_fields ),
-            divider10(),
-            TextFieldNormalWidget(hintText:"Description" ,icon: Icons.description),
-            divider10(),
-            Text("Categoria"),
-
-            Wrap(
-              spacing: 10.0,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              runAlignment: WrapAlignment.start,
-              children: [
-              FilterChip(
-              selected: true,
-              backgroundColor: kBrandSegundaryColor,
-              padding:const EdgeInsets.symmetric(horizontal: 8.0),
-              selectedColor: categoryColor["Personal"],
-              checkmarkColor: Colors.white,
-              labelStyle: TextStyle(
-                color: Colors.white,
-              ),
-              label: Text("Personal"), 
-              onSelected: (bool value){
-
-              }),
-
-              FilterChip(
-              selected: true,
-              backgroundColor: kBrandSegundaryColor,
-              padding:const EdgeInsets.symmetric(horizontal: 8.0),
-              selectedColor: categoryColor["Trabajo"],
-              checkmarkColor: Colors.white,
-              labelStyle: TextStyle(
-                color: Colors.white,
-              ),
-              label: Text("Trabajo"), 
-              onSelected: (bool value){
-
-              }),
-
-              FilterChip(
-              selected: true,
-              backgroundColor: kBrandSegundaryColor,
-              padding:const EdgeInsets.symmetric(horizontal: 8.0),
-              selectedColor: categoryColor["Otro"],
-              checkmarkColor: Colors.white,
-              labelStyle: TextStyle(
-                color: Colors.white,
-              ),
-              label: Text("Otro"), 
-              onSelected: (bool value){
-
-              }),
-              
-            ],),
-            divider10(),
-            
-            ButtomNormalWidget(),
-            
-          ],
-        ),
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: TaskFormWidget(),
         );
       },);
   }
@@ -180,7 +112,7 @@ class HomePage extends StatelessWidget {
                   color: kBrandPrimaryColor,
                 ),),
                 divider10(),
-                TextFieldNormalWidget(hintText:"Buscar tarea..." ,icon:Icons.search ),
+                TextFieldNormalWidget(hintText:"Buscar tarea..." ,icon:Icons.search,controller:_searchController , ),
               ],
             ),
           ),

@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import '../general/colors.dart';
 
 class ButtomNormalWidget extends StatelessWidget {
-  const ButtomNormalWidget({super.key});
+  Function onPressed;
+
+  ButtomNormalWidget({
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class ButtomNormalWidget extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () {
-                  
+                  onPressed();
                 }, 
                 style: ElevatedButton.styleFrom(
                   primary: kBrandPrimaryColor,
