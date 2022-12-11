@@ -5,7 +5,7 @@ class TaskModel{
   String description;
   String date;
   String category;
-  String status;
+  bool status;
 
   TaskModel({required this.title,
   required this.description,
@@ -19,6 +19,6 @@ class TaskModel{
     description: json["description"], 
     date: json["date"], 
     category: json["category"], 
-    status: json["status"]
+    status: json["status"],
     );
 }

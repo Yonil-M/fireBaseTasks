@@ -1,10 +1,13 @@
+import 'package:firetasks/models/task_model.dart';
 import 'package:firetasks/ui/widgets/item_category_widget.dart';
 import 'package:flutter/material.dart';
 import '../general/colors.dart';
 import 'general_widget.dart';
 
 class ItemTaskWidget extends StatelessWidget {
-  const ItemTaskWidget({super.key});
+  TaskModel taskModel;
+
+  ItemTaskWidget({required this.taskModel});
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +30,20 @@ class ItemTaskWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ItemCategoriaWidget(
-                text:"Personal"
-              ),
+                text:taskModel.category),
               divider3(),
-              Text("Lorem ipsum dolor sit amet",style: TextStyle(
+              Text(taskModel.title,style: TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.w600,
                 color: kBrandPrimaryColor.withOpacity(0.85),
               ),),
-              Text("Lorem ipsum dolor sit amet  orem ipsum dolor sit amet orem ipsum dolor sit amet",style: TextStyle(
+              Text(taskModel.description,style: TextStyle(
                 fontSize: 14.0,
                 fontWeight: FontWeight.w400,
                 color: kBrandPrimaryColor.withOpacity(0.7),
               ),),
               divider6(),
-              Text("10/12/2022",style: TextStyle(
+              Text(taskModel.date,style: TextStyle(
                 fontSize: 14.0,
                 fontWeight: FontWeight.w400,
                 color: kBrandPrimaryColor.withOpacity(0.7),

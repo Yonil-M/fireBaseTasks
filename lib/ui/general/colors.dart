@@ -10,3 +10,4 @@ Map<String,Color> categoryColor={
   "Trabajo":Color(0xffEF476F),
   "Otro":Color(0xffFFC300),
 };
+
