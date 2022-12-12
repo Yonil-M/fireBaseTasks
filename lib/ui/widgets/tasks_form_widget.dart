@@ -1,4 +1,6 @@
 
+import 'package:firetasks/models/task_model.dart';
+import 'package:firetasks/services/my_service_firestore.dart';
 import 'package:firetasks/ui/widgets/texField_normalWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,7 @@ class TaskFormWidget extends StatefulWidget {
 
 class _TaskFormWidgetState extends State<TaskFormWidget> {
   final forKey=GlobalKey<FormState>();
+  MyServiceFirestore taskService=MyServiceFirestore(collection: "tasks");
 
 final TextEditingController _titleController=TextEditingController();
 final TextEditingController _descriptionController=TextEditingController();
@@ -55,6 +58,27 @@ showSelectDate()async{
     }
 }
 
+
+regiterTask(){
+  if(forKey.currentState!.validate()){
+      //
+      TaskModel taskModel=TaskModel(
+        title: _titleController.text, 
+        description: _descriptionController.text, 
+        date: _dateController.text, 
+        category: categorySelect, 
+        status: true);
+      taskService.addtask(taskModel).then((value) {
+        if(value.isNotEmpty){
+          Navigator.pop(context);
+          showSnackBarSuccess(context, "La tarea se registro con exito");
+        }
+      }).catchError((error){
+        showSnackbarError(context, "Hubo un problema, intentalo nuevamente");
+        Navigator.pop(context);
+      }) ;
+                }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -142,10 +166,9 @@ showSelectDate()async{
               controller: _dateController,
               ),
               divider20(),
+
               ButtomNormalWidget(onPressed: (){
-                if(forKey.currentState!.validate()){
-                  //
-                }
+                regiterTask();
               }),
               
             ],
